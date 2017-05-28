@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 
-  <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
   <script src="js/docs.js"></script>
@@ -16,25 +19,30 @@
 
 
   <style type="text/css">
-  body {
-    background-color: #FFFFFF;
-  }
-  .ui.menu .item img.logo {
-    margin-right: 1.5em;
-  }
-  .main.container {
-    margin-top: 7em;
-  }
-  .wireframe {
-    margin-top: 2em;
-  }
-  .ui.footer.segment {
-    margin: 5em 0em 0em;
-    padding: 5em 0em;
-  }
+    body {
+      background-color: #FFFFFF;
+    }
+
+    .ui.menu .item img.logo {
+      margin-right: 1.5em;
+    }
+
+    .main.container {
+      margin-top: 7em;
+    }
+
+    .wireframe {
+      margin-top: 2em;
+    }
+
+    .ui.footer.segment {
+      margin: 5em 0em 0em;
+      padding: 5em 0em;
+    }
   </style>
 
 </head>
+
 <body>
 
   <div class="ui fixed inverted menu">
@@ -56,27 +64,27 @@
 
 
   <div class="ui main container">
- 	<div class="ui grid">
-  	<div class="four wide column">
-    <div class="ui secondary vertical pointing menu">
-      <a class="item active" data-tab="tab_Info" data-vivaldi-spatnav-clickable="1">
+    <div class="ui grid">
+      <div class="four wide column">
+        <div class="ui secondary vertical pointing menu">
+          <a class="item active" data-tab="tab_Info" data-vivaldi-spatnav-clickable="1">
         <i class="gamepad icon"></i>
         Info
       </a>
-      <a class="item" data-tab="tab_second" data-vivaldi-spatnav-clickable="1">
+          <a class="item" data-tab="tab_second" data-vivaldi-spatnav-clickable="1">
         <i class="gamepad icon"></i>
         Triage
       </a>
-      <a class="item" data-tab="tab_third" data-vivaldi-spatnav-clickable="1">
+          <a class="item" data-tab="tab_third" data-vivaldi-spatnav-clickable="1">
         <i class="gamepad icon"></i>
         Statistics
       </a>
-    </div>
-  </div>
+        </div>
+      </div>
 
-  <div class="twelve wide stretched column">
+      <div class="twelve wide stretched column">
         <div class="ui bottom attached tab active" data-tab="tab_Info">
-          <embed src="intro.html" width ="100%" height ="800px">
+          <embed src="intro.html" width="100%" height="800px">
         </div>
 
         <div class="ui bottom attached tab" data-tab="tab_second">
@@ -86,55 +94,77 @@
               <div class="ui teal progress" id="triage_progress" style="margin-bottom: 0px;">
                 <div class="bar">
                   <div class="progress"></div>
-                  </div>
+                </div>
               </div>
             </div>
             <div class="three wide column" style="padding-bottom: 0px;">
               <div class="ui buttons">
                 <button class="ui grey button" data-vivaldi-spatnav-clickable="1">Undo</button>
                 <button class="ui button" data-vivaldi-spatnav-clickable="1">Next</button>
+              </div>
             </div>
           </div>
-        </div>
 
 
           <div class="ui raised very padded segment" style="  margin-top: 0px;">
-            <img src="images/tweet.jpeg" width ="100%">
+            <!-- Removed image and added tweet-link from previous page -->
+            <a id="tweet-link" href="#">
+              <div id="tweet-text">
+                Loading...
+              </div>
+            </a>
+            <!-- <img src="images/tweet.jpeg" width="100%"> -->
           </div>
-          <embed src="context.html" width ="100%" height ="220px">
+          <embed src="context.html" width="100%" height="220px">
 
-      <div class="ui raised very padded segment" style="padding-top: 50px;">
-        <div class="ui five column doubling grid">
-          <div class="column"><img src="images/triage-none.png" width ="100%"></div>
-          <div class="column"><img src="images/triage-low.png" width ="100%"></div>
-          <div class="column"><img src="images/triage-moderate.png" width ="100%"></div>
-          <div class="column"><img src="images/triage-high.png" width ="100%"></div>
-          <div class="column"><img src="images/triage-immediate.png" width ="100%"></div>
-        </div>
-      </div>
+          <div class="ui raised very padded segment" style="padding-top: 50px;">
+            <!-- <div class="ui five column doubling grid">
+              <div class="column"><img src="images/triage-none.png" width="100%"></div>
+              <div class="column"><img src="images/triage-low.png" width="100%"></div>
+              <div class="column"><img src="images/triage-moderate.png" width="100%"></div>
+              <div class="column"><img src="images/triage-high.png" width="100%"></div>
+              <div class="column"><img src="images/triage-immediate.png" width="100%"></div>
+            </div> -->
+
+            <div class="ui five column doubling grid">
+              <div class="column">
+                <button class="ui basic button" value="none">
+                  <img src="images/triage-none.png" width="100%">
+                </button>
+              </div>
+              <div class="column">
+                <button class="ui basic button" value="none">
+                  <img src="images/triage-low.png" width="100%">
+                </button>
+              </div>
+              <div class="column">
+                <button class="ui basic button" value="none">
+                  <img src="images/triage-moderate.png" width="100%">
+                </button>
+              </div>
+              <div class="column">
+                <button class="ui basic button" value="none">
+                  <img src="images/triage-high.png" width="100%">
+                </button>
+              </div>
+              <div class="column">
+                <button class="ui basic button" value="none">
+                  <img src="images/triage-immediate.png" width="100%">
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
 
         <div class="ui bottom attached tab " data-tab="tab_third">
-           <embed src="stat.html" width ="100%" height ="800px">
+          <embed src="stat.html" width="100%" height="800px">
         </div>
 
+      </div>
+    </div>
   </div>
   </div>
-	</div>
- </div>
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
       <img src="./images/hand_logo.png" class="ui centered mini image">
@@ -147,15 +177,195 @@
     </div>
   </div>
 
-<script>
-$('.menu .item')
-  .tab()
-;
+  <script>
+    $('.menu .item')
+      .tab();
 
-$('#triage_progress').progress({
-  percent: 78
-});
+    // $('#triage_progress').progress({
+    //   percent: 78;
+    // });
+  </script>
 
-</script>
+  <!-- Sravan - Added below script for integration of this new UI page to pybossa -->
 
-<span style="border-radius: 3px; text-indent: 20px; width: auto; padding: 0px 4px 0px 0px; text-align: center; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 11px; line-height: 20px; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(255, 255, 255); background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; -webkit-font-smoothing: antialiased; top: 454px; left: 406px;">Save</span><span style="border-radius: 3px; text-indent: 20px; width: 20px; height: 20px; background: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHdpZHRoPSIzMHB4IiBoZWlnaHQ9IjMwcHgiIHZpZXdCb3g9IjAgMCAzMCAzMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KPGc+CjxwYXRoIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI0IiBkPSJNMTcsMTcgTDIyLDIyIFogIi8+CjxjaXJjbGUgc3Ryb2tlPSIjZmZmIiBjeD0iMTMiIGN5PSIxMyIgcj0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjUiLz4KPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAsMCBMOCwwIEw4LDMgTDMsMyBMMyw4IEwwLDggWiIvPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzAsMjIgTDMwLDMwIEwyMiwzMCBMMjIsMjcgTDI3LDI3IEwyNywyMiBaIi8+CjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zMCwwIEwzMCw4IEwyNyw4IEwyNywzIEwyMiwzIEwyMiwwIFoiLz4KPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAsMjIgTDMsMjIgTDMsMjcgTDgsMjcgTDgsMzAgTDAsMzBaIi8+CjwvZz4KPC9zdmc+Cg==&quot;) 50% 50% / 14px 14px no-repeat rgba(0, 0, 0, 0.4); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; top: 454px; left: 461px;"></span></body></html>
+
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    function loadDisqus() {
+      $("#disqus_thread").toggle();
+      $(".btn-disqus").toggle();
+      var disqus_shortname = 'pybossa'; // required: replace example with your forum shortname
+      //var disqus_identifier = taskId;
+      var disqus_developer = 1;
+
+      (function() {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    }
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  <script>
+    // Default language
+    var projectname = 'ASUdemo';
+    var userLocale = "en";
+    var tweetid;
+    var username;
+    var contextclicked = false;
+    var taskid = '';
+    var userid = '';
+    var etime = '';
+    $("#undo").hide();
+
+    // Translations
+    var messages = {
+      "en": {
+        "i18n_welldone": "Well done!",
+        "i18n_welldone_text": "Your answer has been saved",
+        "i18n_loading_next_task": "Loading next task...",
+        "i18n_task_completed": "The task has been completed!",
+        "i18n_thanks": "Thanks a lot!",
+        "i18n_congratulations": "Congratulations",
+        "i18n_congratulations_text": "You have participated in all available tasks!",
+        //"i18n_none": "None",
+        //"i18n_low": "Low",
+        //"i18n_moderate": "Moderate",
+        //"i18n_high": "High",
+        //"i18n_immediate": "Immediate",
+        //"i18n_i_dont_know": "I don't know",
+        "i18n_working_task": "You are working now on task:",
+        "i18n_tasks_completed": "You have completed:",
+        "i18n_tasks_from": "tasks from",
+        "i18n_question": "What is the risk of suicidal behavior?",
+      },
+      "es": {
+        "i18n_welldone": "Bien hecho!",
+        "i18n_welldone_text": "Tu respuesta ha sido guardada",
+        "i18n_loading_next_task": "Cargando la siguiente tarea...",
+        "i18n_task_completed": "La tarea ha sido completadas!",
+        "i18n_thanks": "Muchísimas gracias!",
+        "i18n_congratulations": "Enhorabuena",
+        "i18n_congratulations_text": "Has participado en todas las tareas disponibles!",
+        //"i18n_none": "Ninguno",
+        //"i18n_low": "Bajo",
+        //"i18n_moderate": "Moderado",
+        //"i18n_high": "Alto",
+        //"i18n_immediate": "Inmediato",
+        //"i18n_i_dont_know": "No lo sé",
+        "i18n_working_task": "Estás trabajando en la tarea:",
+        "i18n_tasks_completed": "Has completado:",
+        "i18n_tasks_from": "tareas de",
+        "i18n_question": "¿Qué es el nivel del riesgo de comportamiento suicida?",
+      }
+    };
+    // Update userLocale with server side information
+    $(document).ready(function() {
+      userLocale = document.getElementById('PYBOSSA_USER_LOCALE').textContent.trim();
+    });
+
+    function i18n_translate() {
+      var ids = Object.keys(messages[userLocale]);
+      for (i = 0; i < ids.length; i++) {
+        console.log("Translating: " + ids[i]);
+        document.getElementById(ids[i]).innerHTML = messages[userLocale][ids[i]];
+      }
+    }
+
+    function loadUserProgress() {
+      pybossa.userProgress(projectname).done(function(data) {
+        var pct = Math.round((data.done * 100) / data.total);
+        $("#progress").css("width", pct.toString() + "%");
+        $("#progress").attr("title", pct.toString() + "% completed!");
+        $("#progress").tooltip({
+          'placement': 'left'
+        });
+        $("#total").text(data.total);
+        $("#done").text(data.done);
+      });
+    }
+
+    var task = {
+      task.info.flagged_message.id_str = 868872658171121664;
+    };
+
+    pybossa.presentTask(function(task, deferred) {
+      // if ($.isEmptyObject(task)) {
+      loadUserProgress();
+      i18n_translate();
+
+      var startTime = new Date();
+      var flagged_message = task.info.flagged_message;
+      preceeding_tweets = task.info.preceding_messages;
+      following_tweets = task.info.following_messages;
+
+      //tweetid =  task.info.id;
+      taskid = task.id;
+
+      tweetid = flagged_message.id_str;
+      username = flagged_message.user.screen_name;
+      //username =  task.info.user;
+      $('#user-name').html(username);
+      var tweet_time = moment(flagged_message.created_at, "ddd MMM DD HH:mm:ss ZZZZ YYYY");
+      $('#tweet-time').html(tweet_time.format("ddd MMM DD HH:mm:ss YYYY"));
+      var place = flagged_message.geo;
+      if (place === null) {
+        place = "unknown"
+      }
+      $('#user-location').html(place);
+
+      $('#tweet-link').html('').append(flagged_message.text);
+      //Create the display url
+      var url = "https://twitter.com/statuses/" + tweetid;
+      $("#tweet-link").attr("href", url);
+      //$("#question").html(task.info.question);
+      $('#task-id').html(task.id);
+
+      $('.btn-answer').off('click').on('click', function(evt) {
+        $("#undo").show();
+        var endTime = new Date();
+        clearSurroundedTable();
+        var answer = $(this).attr("value");
+
+        var saveResult = {
+          "answer": answer,
+          "elapsedTime": endTime - startTime,
+          "contextClicked": contextclicked
+        };
+        if (typeof answer != 'undefined') {
+          //console.log(answer);
+          pybossa.saveTask(task.id, saveResult).done(function() {
+            deferred.resolve();
+            etime = endTime - startTime;
+          });
+          $("#loading").fadeIn(500);
+          if ($("#disqus_thread").is(":visible")) {
+            $('#disqus_thread').toggle();
+            $('.btn-disqus').toggle();
+          }
+        } else {
+          $("#error").show();
+        }
+      });
+      $("#loading").hide();
+      // } else {
+      //   $(".skeleton").hide();
+      //   $("#loading").hide();
+      //   $("#finish").fadeIn(500);
+      // }
+    });
+
+    pybossa.run(projectname);
+  </script>
+
+  <span style="border-radius: 3px; text-indent: 20px; width: auto; padding: 0px 4px 0px 0px; text-align: center; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 11px; line-height: 20px; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(255, 255, 255); background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; -webkit-font-smoothing: antialiased; top: 454px; left: 406px;">Save</span>
+  <span style="border-radius: 3px; text-indent: 20px; width: 20px; height: 20px; background: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHdpZHRoPSIzMHB4IiBoZWlnaHQ9IjMwcHgiIHZpZXdCb3g9IjAgMCAzMCAzMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KPGc+CjxwYXRoIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI0IiBkPSJNMTcsMTcgTDIyLDIyIFogIi8+CjxjaXJjbGUgc3Ryb2tlPSIjZmZmIiBjeD0iMTMiIGN5PSIxMyIgcj0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjUiLz4KPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAsMCBMOCwwIEw4LDMgTDMsMyBMMyw4IEwwLDggWiIvPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzAsMjIgTDMwLDMwIEwyMiwzMCBMMjIsMjcgTDI3LDI3IEwyNywyMiBaIi8+CjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zMCwwIEwzMCw4IEwyNyw4IEwyNywzIEwyMiwzIEwyMiwwIFoiLz4KPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAsMjIgTDMsMjIgTDMsMjcgTDgsMjcgTDgsMzAgTDAsMzBaIi8+CjwvZz4KPC9zdmc+Cg==&quot;) 50% 50% / 14px 14px no-repeat rgba(0, 0, 0, 0.4); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; top: 454px; left: 461px;"></span>
+</body>
+
+</html>
