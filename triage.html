@@ -99,8 +99,8 @@
             </div>
             <div class="three wide column" style="padding-bottom: 0px;">
               <div class="ui buttons">
-                <button class="ui grey button" data-vivaldi-spatnav-clickable="1">Undo</button>
-                <button class="ui button" data-vivaldi-spatnav-clickable="1">Next</button>
+                <button id="undo" class="ui grey button" onclick="undo" data-vivaldi-spatnav-clickable="1">Undo</button>
+                <button id="next" class="ui button" onclick="next" data-vivaldi-spatnav-clickable="1">Next</button>
               </div>
             </div>
           </div>
@@ -292,76 +292,158 @@
     }
 
     var task = {
-      task.info.flagged_message.id_str = 868872658171121664;
+      id: 1,
+      info: {
+        flagged_message: {
+          id_str = 868872658171121664,
+          user: {
+            screen_name: "susravan"
+          },
+          created_at: "Date and time comes here"
+        }
+        preceding_messages: {},
+        following_messages: {}
+      }
     };
 
     pybossa.presentTask(function(task, deferred) {
-      // if ($.isEmptyObject(task)) {
-      loadUserProgress();
-      i18n_translate();
+      if ($.isEmptyObject(task)) {
+        loadUserProgress();
+        i18n_translate();
 
-      var startTime = new Date();
-      var flagged_message = task.info.flagged_message;
-      preceeding_tweets = task.info.preceding_messages;
-      following_tweets = task.info.following_messages;
+        var startTime = new Date();
+        var flagged_message = task.info.flagged_message;
+        preceeding_tweets = task.info.preceding_messages;
+        following_tweets = task.info.following_messages;
 
-      //tweetid =  task.info.id;
-      taskid = task.id;
+        //tweetid =  task.info.id;
+        taskid = task.id;
 
-      tweetid = flagged_message.id_str;
-      username = flagged_message.user.screen_name;
-      //username =  task.info.user;
-      $('#user-name').html(username);
-      var tweet_time = moment(flagged_message.created_at, "ddd MMM DD HH:mm:ss ZZZZ YYYY");
-      $('#tweet-time').html(tweet_time.format("ddd MMM DD HH:mm:ss YYYY"));
-      var place = flagged_message.geo;
-      if (place === null) {
-        place = "unknown"
-      }
-      $('#user-location').html(place);
-
-      $('#tweet-link').html('').append(flagged_message.text);
-      //Create the display url
-      var url = "https://twitter.com/statuses/" + tweetid;
-      $("#tweet-link").attr("href", url);
-      //$("#question").html(task.info.question);
-      $('#task-id').html(task.id);
-
-      $('.btn-answer').off('click').on('click', function(evt) {
-        $("#undo").show();
-        var endTime = new Date();
-        clearSurroundedTable();
-        var answer = $(this).attr("value");
-
-        var saveResult = {
-          "answer": answer,
-          "elapsedTime": endTime - startTime,
-          "contextClicked": contextclicked
-        };
-        if (typeof answer != 'undefined') {
-          //console.log(answer);
-          pybossa.saveTask(task.id, saveResult).done(function() {
-            deferred.resolve();
-            etime = endTime - startTime;
-          });
-          $("#loading").fadeIn(500);
-          if ($("#disqus_thread").is(":visible")) {
-            $('#disqus_thread').toggle();
-            $('.btn-disqus').toggle();
-          }
-        } else {
-          $("#error").show();
+        tweetid = flagged_message.id_str;
+        username = flagged_message.user.screen_name;
+        //username =  task.info.user;
+        $('#user-name').html(username);
+        var tweet_time = moment(flagged_message.created_at, "ddd MMM DD HH:mm:ss ZZZZ YYYY");
+        $('#tweet-time').html(tweet_time.format("ddd MMM DD HH:mm:ss YYYY"));
+        var place = flagged_message.geo;
+        if (place === null) {
+          place = "unknown"
         }
-      });
-      $("#loading").hide();
-      // } else {
-      //   $(".skeleton").hide();
-      //   $("#loading").hide();
-      //   $("#finish").fadeIn(500);
-      // }
+        $('#user-location').html(place);
+
+        $('#tweet-link').html('').append(flagged_message.text);
+        //Create the display url
+        var url = "https://twitter.com/statuses/" + tweetid;
+        $("#tweet-link").attr("href", url);
+        //$("#question").html(task.info.question);
+        $('#task-id').html(task.id);
+
+        $('.btn-answer').off('click').on('click', function(evt) {
+          $("#undo").show();
+          var endTime = new Date();
+          clearSurroundedTable();
+          var answer = $(this).attr("value");
+
+          var saveResult = {
+            "answer": answer,
+            "elapsedTime": endTime - startTime,
+            "contextClicked": contextclicked
+          };
+          if (typeof answer != 'undefined') {
+            //console.log(answer);
+            pybossa.saveTask(task.id, saveResult).done(function() {
+              deferred.resolve();
+              etime = endTime - startTime;
+            });
+            $("#loading").fadeIn(500);
+            if ($("#disqus_thread").is(":visible")) {
+              $('#disqus_thread').toggle();
+              $('.btn-disqus').toggle();
+            }
+          } else {
+            $("#error").show();
+          }
+        });
+        $("#loading").hide();
+      } else {
+        $(".skeleton").hide();
+        $("#loading").hide();
+        $("#finish").fadeIn(500);
+      }
     });
 
     pybossa.run(projectname);
+
+    function clearSurroundedTable() {
+      var tbl = $('#afterTweets');
+      var tbl2 = $('#beforeTweets');
+      tbl.innerHTML = "";
+      tbl2.innerHTML = "";
+      var btn = $("#btn-surroundedtweet");
+      btn.innerHTML = "<span class=\"fa fa-bars\"></span> context"
+    }
+    
+    function undo() {
+      $("#undo").style.color = "red";
+      var prev_task_id = taskid + 1;
+      console.log("prev_task_id" + prev_task_id);
+      console.log("prev_task_elapsedtime" + etime);
+
+      var json = $.getJSON("https://arkhum.dtn.asu.edu/api/taskrun?task_id=" + prev_task_id);
+      json.done(function(data) {
+        for (i = 0; i < data.length; i++) {
+          if (data[i].info.elapsedTime == data[i].info.elapsedTime) {
+            console.log("taskrun_id" + data[i].id);
+            console.log("task_id" + data[i].task_id);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "https://arkhum.dtn.asu.edu/api/taskrun/" + data[i].id);
+            xhr.send();
+            console.log(xhr.status);
+            console.log(xhr.statusText);
+          }
+        }
+      });
+      window.location.href = 'https://arkhum.dtn.asu.edu/project/ASUdemo/task/' + (prev_task_id);
+      console.log(json);
+    }
+
+    function getTimelineData(username, tweetid) {
+      $.ajax({
+        url: "/gettimeline",
+        data: 'username=' + username + '&id=' + tweetid,
+        cache: false,
+        dataType: 'json',
+        success: function(result) {
+          var tweets = result.text;
+          var url = result.url;
+          var time = result.time;
+          var cut = result.beforelength;
+          if (tweets.length > 0) {
+            buildTables('beforeTweets', tweets.slice(0, cut), url.slice(0, cut), time.slice(0, cut));
+            if (tweets.length - cut > 0)
+              buildTables('afterTweets', tweets.slice(cut), url.slice(cut), time.slice(cut));
+          }
+        }
+      });
+    }
+
+    function buildTables(tableId, tweets, url, time) {
+      var tbl = document.getElementById(tableId);
+      tbl.style.visibility = "visible";
+      for (i = 0; i < tweets.length; i++) {
+        var row = tbl.insertRow(i);
+        //row.className += "bubble"
+        var td = row.insertCell(0);
+        td.className += "bubble-small";
+        td.innerHTML = "<span>" + time[i] + "</span><span><h2><a href=\"" + url[i] + "\">" + tweets[i] + "</a></h2></span>";
+        tbl.appendChild(row);
+      }
+    }
+
+    function next() {
+
+    }
   </script>
 
   <span style="border-radius: 3px; text-indent: 20px; width: auto; padding: 0px 4px 0px 0px; text-align: center; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 11px; line-height: 20px; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif; color: rgb(255, 255, 255); background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28); position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; -webkit-font-smoothing: antialiased; top: 454px; left: 406px;">Save</span>
